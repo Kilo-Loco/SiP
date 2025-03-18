@@ -6,7 +6,7 @@ describe('<HomeScreen />', () => {
   test('Text renders correctly on HomeScreen', () => {
     const { getByText } = render(<HomeScreen />);
 
-    getByText('Welcome!');
+    getByText('Kyle');
   });
 
   test('CustomText renders correctly', () => {
