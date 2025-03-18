@@ -1,10 +1,11 @@
-interface TaskManager {
+export interface TaskManager {
     createTask(title: string): number;
     listTasks(): string[];
+    clearCache(): number;
 }
 
 class TaskManagerImpl implements TaskManager {
-    taskCache: string[]
+    private taskCache: string[]
 
     constructor() {
         this.taskCache = [];
@@ -15,7 +16,7 @@ class TaskManagerImpl implements TaskManager {
     }
 
     listTasks(): string[] {
-        return this.taskCache;
+        return [...this.taskCache];
     }
 
     clearCache(): number {
@@ -24,6 +25,4 @@ class TaskManagerImpl implements TaskManager {
     }
 }
 
-const _TaskManagerImpl = new TaskManagerImpl();
-
-export default _TaskManagerImpl;
+export const createTaskManager = () => new TaskManagerImpl();
