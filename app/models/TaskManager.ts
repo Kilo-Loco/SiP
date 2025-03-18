@@ -1,28 +1,19 @@
-export interface TaskManager {
-    createTask(title: string): number;
-    listTasks(): string[];
-    clearCache(): number;
-}
+export type TaskManager = {
+    createTask: (title: string) => number;
+    listTasks: () => string[];
+    clearCache: () => number;
+};
 
-class TaskManagerImpl implements TaskManager {
-    private taskCache: string[]
+// Function-based implementation
+export const createTaskManager = (): TaskManager => {
+    let taskCache: string[] = [];
 
-    constructor() {
-        this.taskCache = [];
+    return {
+        createTask: (title: string): number => taskCache.push(title),
+        listTasks: (): string[] => [...taskCache],
+        clearCache: (): number => {
+            taskCache = [];
+            return taskCache.length;
+        }
     };
-
-    createTask(title: string): number {
-        return this.taskCache.push(title);
-    }
-
-    listTasks(): string[] {
-        return [...this.taskCache];
-    }
-
-    clearCache(): number {
-        this.taskCache = [];
-        return this.taskCache.length;
-    }
-}
-
-export const createTaskManager = () => new TaskManagerImpl();
+};

@@ -32,10 +32,11 @@ describe('TaskManagerImpl', () => {
     });
 
     test('Can clear cache', () => {
-        const task1 = 'Task 1';
-        const task2 = 'Task 2';
-        const clearedCacheCount = sut.clearCache();
-        expect(clearedCacheCount).toBe(0);
+        const tasks = ['Task 1', 'Task 2', 'Task 3'];
+
+        tasks.forEach((task) => sut.createTask(task));
+
+        expect(sut.clearCache()).toBe(0);
         expect(sut.listTasks()).toEqual([]);
     });
 });
